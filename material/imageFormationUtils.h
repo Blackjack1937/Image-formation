@@ -62,3 +62,11 @@ int main(int argc, char* argv[])
 void computeTrans(float gama, float beta, float alpha, float T_x, float T_y, float T_z, float *result);
 
 int perspective_projection(int N, struct point3d *points, int f);
+
+void projectToImagePlane(int N, struct point3d *points, int f, float *Ximg, float *Yimg);
+
+void uvProjection(int N, float *Ximg, float *Yimg, float alpha_u, float alpha_v, int u0, int v0, int *u, int *v);
+
+void saveImage(int width, int height, unsigned char *image, const char *filename);
+
+void rigidTransformation(int N, struct point3d *points, float gamma, float beta, float alpha, float T_x, float T_y, float T_z);
