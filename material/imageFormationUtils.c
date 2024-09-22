@@ -181,9 +181,9 @@ void computeTrans(float gama, float beta, float alpha, float T_x, float T_y, flo
 
 int perspective_projection(int N, struct point3d *points, int f)
 {
-  int **array;
 
-  array = (int **)malloc(N * sizeof(int *));
+  float **array = (float **)malloc(N * sizeof(float *));
+
   if (array == NULL)
   {
     printf("Memory allocation failed!\n");
@@ -192,7 +192,7 @@ int perspective_projection(int N, struct point3d *points, int f)
 
   for (int i = 0; i < N; i++)
   {
-    array[i] = (int *)malloc(4 * sizeof(int));
+    array[i] = (float *)malloc(4 * sizeof(int));
     if (array[i] == NULL)
     {
       printf("Memory allocation for vector %d failed!\n", i);
@@ -203,7 +203,6 @@ int perspective_projection(int N, struct point3d *points, int f)
   for (int i = 0; i < N; i++)
   {
     array[i][0] = points[i].x;
-    printf("xvalue = %f", points[i].x);
     array[i][1] = points[i].y;
     array[i][2] = 0;
     array[i][3] = 1 + (points[i].z / f);
@@ -214,7 +213,7 @@ int perspective_projection(int N, struct point3d *points, int f)
     printf("Column vector %d: ", i);
     for (int j = 0; j < 4; j++)
     {
-      printf("%d ", array[i][j]);
+      printf("%f ", array[i][j]);
     }
     printf("\n");
   }

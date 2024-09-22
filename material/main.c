@@ -8,10 +8,16 @@ int main(int argc, char *argv[])
     int N_v = 0;
     points = readOff("frameCube.off", &N_v);
 
+    if (points == NULL)
+    {
+        fprintf(stderr, "Failed to read points from file.\n");
+        return 1;
+    }
+
+    int f = 1;
     // centerThePCL(points, N_v);
+    perspective_projection(N_v, points, f);
 
-    perspective_projection(N_v, points, 1);
-    printf("The number of points in the .off file are : %d", N_v);
-
+    free(points);
     return 0;
 }

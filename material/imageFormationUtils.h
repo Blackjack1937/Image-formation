@@ -61,4 +61,4 @@ int main(int argc, char* argv[])
 */
 void computeTrans(float gama, float beta, float alpha, float T_x, float T_y, float T_z, float *result);
 
-int perspective_projection(int N, struct point3d *point, int f);
+int perspective_projection(int N, struct point3d *points, int f);
