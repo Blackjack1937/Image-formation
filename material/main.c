@@ -14,21 +14,44 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    int f = 1;
+    // Centering the PCL
+    /* centerThePCL(points, N_v); */
 
-    // Applying a rigid transformation, replacing p by p'
+    int f = 1.5;
 
-    float yaw = 0.0f;
-    float pitch = 0.0f;
-    float roll = 0.0f;
-    float Tx = 0.0f;
-    float Ty = 0.0f;
-    float Tz = 0.0f;
+    // Applying a rigid transformation, replacing p by p' (1)
+
+    float yaw = 0.2f;
+    float pitch = 0.2f;
+    float roll = 0.2f;
+    float Tx = 0.2f;
+    float Ty = 0.2f;
+    float Tz = 0.2f;
+
+    // Translation calculation debug
+    /* for (int i = N_v - 10; i < N_v; i++)
+    {
+        float originalX = points[i].x;
+        float originalY = points[i].y;
+        float originalZ = points[i].z;
+
+        printf("Original Point %d: X = %f, Y = %f, Z = %f\n", i, originalX, originalY, originalZ);
+
+        rigidTransformation(1, &points[i], yaw, pitch, roll, Tx, Ty, Tz);
+
+        printf("Transformed Point %d: X = %f, Y = %f, Z = %f\n\n", i, points[i].x, points[i].y, points[i].z);
+    } */
 
     rigidTransformation(N_v, points, yaw, pitch, roll, Tx, Ty, Tz);
 
-    // Centering the PCL and (2) projection
-    centerThePCL(points, N_v);
+    /* // Debug print transformed points
+    for (int i = 0; i < N_v; i++)
+    {
+        printf("Transformed Point %d: X = %f, Y = %f, Z = %f\n", i, points[i].x, points[i].y, points[i].z);
+    } */
+
+    // (2) projection
+
     perspective_projection(N_v, points, f);
 
     float *Ximg = (float *)malloc(N_v * sizeof(float));
@@ -44,10 +67,10 @@ int main(int argc, char *argv[])
     // (3) projection
     projectToImagePlane(N_v, points, f, Ximg, Yimg);
 
-    /* for (int i = 0; i < N_v; i++)
-    {
-        printf("Point %d: Ximg = %f, Yimg = %f\n", i, Ximg[i], Yimg[i]);
-    } */
+    /*  for (int i = 0; i < N_v; i++)
+     {
+         printf("Point %d: Ximg = %f, Yimg = %f\n", i, Ximg[i], Yimg[i]);
+     } */
 
     float alpha_u = 0.001;
     float alpha_v = 0.001;
@@ -66,12 +89,13 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    // UV pixel projection
     uvProjection(N_v, Ximg, Yimg, alpha_u, alpha_v, u0, v0, u, v);
 
-    /* for (int i = 0; i < N_v; i++)
-    {
-        printf("Point %d: u = %d, v = %d\n", i, u[i], v[i]);
-    } */
+    /*  for (int i = 0; i < N_v; i++)
+     {
+         printf("Point %d: u = %d, v = %d\n", i, u[i], v[i]);
+     } */
 
     int imageWidth = 1024, imageHeight = 1024;
     unsigned char *image = (unsigned char *)calloc(imageWidth * imageHeight * 3, sizeof(unsigned char));
