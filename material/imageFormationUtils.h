@@ -71,4 +71,6 @@ void saveImage(int width, int height, unsigned char *image, const char *filename
 
 void rigidTransformation(int N, struct point3d *points, float gamma, float beta, float alpha, float T_x, float T_y, float T_z);
 
-void orthogonalProjection(int n, struct point3d *points, float *Ximg, float *Yimg);
+void orthogonalProjection(int N, struct point3d *points, float *Ximg, float *Yimg);
+
+void frontFacingPoints(int N, struct point3d *points, float *Ximg, float *Yimg, int *frontFacingIndices, int *count);

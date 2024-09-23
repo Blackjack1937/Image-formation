@@ -290,3 +290,20 @@ void orthogonalProjection(int N, struct point3d *points, float *Ximg, float *Yim
     Yimg[i] = points[i].y;
   }
 }
+
+// Occlusion method (Only front points)
+
+void frontFacingPoints(int N, struct point3d *points, float *Ximg, float *Yimg, int *frontFacingIndices, int *count)
+{
+  *count = 0;
+  for (int i = 0; i < N; i++)
+  {
+    if (points[i].z <= 0)
+    {
+      Ximg[*count] = points[i].x;
+      Yimg[*count] = points[i].y;
+      frontFacingIndices[*count] = i;
+      (*count)++;
+    }
+  }
+}

@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     struct point3d *points;
     int N_v = 0;
-    points = readOff("frameCube.off", &N_v);
+    points = readOff("human.off", &N_v);
 
     if (points == NULL)
     {
@@ -15,18 +15,18 @@ int main(int argc, char *argv[])
     }
 
     // Centering the PCL
-    /* centerThePCL(points, N_v); */
+    centerThePCL(points, N_v);
 
-    int f = 1.5;
+    int f = 1.0;
 
     // Applying a rigid transformation, replacing p by p' (1)
 
-    float yaw = 0.2f;
-    float pitch = 0.2f;
-    float roll = 0.2f;
-    float Tx = 0.2f;
-    float Ty = 0.2f;
-    float Tz = 0.2f;
+    float yaw = 0.0f;
+    float pitch = 0.8f;
+    float roll = 0.0f;
+    float Tx = 0.0f;
+    float Ty = 0.0f;
+    float Tz = 0.0f;
 
     // Translation calculation debug
     /* for (int i = N_v - 10; i < N_v; i++)
@@ -67,13 +67,21 @@ int main(int argc, char *argv[])
     // (3) projection
     projectToImagePlane(N_v, points, f, Ximg, Yimg);
 
+    // Orthogonal projection
+    /* orthogonalProjection(N_v, points, Ximg, Yimg); */
+
     /*  for (int i = 0; i < N_v; i++)
      {
          printf("Point %d: Ximg = %f, Yimg = %f\n", i, Ximg[i], Yimg[i]);
      } */
 
-    float alpha_u = 0.001;
-    float alpha_v = 0.001;
+    // Front points filtering
+    /* int *frontFacingIndices = (int *)malloc(N_v * sizeof(int));
+    int frontCount = 0;
+    frontFacingPoints(N_v, points, Ximg, Yimg, frontFacingIndices, &frontCount); */
+
+    float alpha_u = 0.002;
+    float alpha_v = 0.002;
     int u0 = 512;
     int v0 = 512;
 
