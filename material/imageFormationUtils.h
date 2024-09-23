@@ -70,3 +70,5 @@ void uvProjection(int N, float *Ximg, float *Yimg, float alpha_u, float alpha_v,
 void saveImage(int width, int height, unsigned char *image, const char *filename);
 
 void rigidTransformation(int N, struct point3d *points, float gamma, float beta, float alpha, float T_x, float T_y, float T_z);
+
+void orthogonalProjection(int n, struct point3d *points, float *Ximg, float *Yimg);

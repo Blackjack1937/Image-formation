@@ -279,3 +279,14 @@ void rigidTransformation(int N, struct point3d *points, float gamma, float beta,
     points[i].z = transmatrix[8] * x + transmatrix[9] * y + transmatrix[10] * z + transmatrix[11];
   }
 }
+
+// Orthogonal projection
+
+void orthogonalProjection(int N, struct point3d *points, float *Ximg, float *Yimg)
+{
+  for (int i = 0; i < N; i++)
+  {
+    Ximg[i] = points[i].x;
+    Yimg[i] = points[i].y;
+  }
+}
