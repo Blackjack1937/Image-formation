@@ -17,12 +17,12 @@ int main(int argc, char *argv[])
     // Centering the PCL
     centerThePCL(points, N_v);
 
-    int f = 1.0;
+    int f = 10.0;
 
     // Applying a rigid transformation, replacing p by p' (1)
 
     float yaw = 0.0f;
-    float pitch = 0.8f;
+    float pitch = 0.0f;
     float roll = 0.0f;
     float Tx = 0.0f;
     float Ty = 0.0f;
@@ -75,7 +75,8 @@ int main(int argc, char *argv[])
          printf("Point %d: Ximg = %f, Yimg = %f\n", i, Ximg[i], Yimg[i]);
      } */
 
-    // Front points filtering
+    // Front points filtering (Not working properly)
+
     /* int *frontFacingIndices = (int *)malloc(N_v * sizeof(int));
     int frontCount = 0;
     frontFacingPoints(N_v, points, Ximg, Yimg, frontFacingIndices, &frontCount); */
